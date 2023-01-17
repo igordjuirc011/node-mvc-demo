@@ -1,0 +1,30 @@
+{% extends 'layout.twig' %}
+{% block title %}Admin panel{% endblock %}
+
+{% block content %}
+
+    {% include '../components/flash-messages.twig' with {messages: messages} %}
+
+    <div class="row">
+        <div class="col-3">
+            {% include '../components/competitions-sidebar.twig' with {competitions: competitions} %}
+        </div>
+        <div class="col">
+            <div class="mb-3 bg-white p-3 text-muted font-weight-light">
+                <h4 class="font-weight-light">Welcome {{ user.name }}</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultrices nisi lectus, eget ultrices
+                    libero convallis a. Cras imperdiet ultricies neque quis fermentum. Donec laoreet nibh et convallis
+                    ullamcorper. Etiam pretium bibendum vehicula. Integer accumsan eros et mauris ullamcorper, eu congue
+                    orci sagittis. Vivamus consequat libero quis dignissim egestas. In ipsum erat, tincidunt sed aliquet
+                    id, condimentum nec ex. Sed sed massa id quam mattis lobortis. Sed id elit erat. Nunc metus nunc,
+                    mollis pulvinar massa sed, varius pretium ligula.</p>
+            </div>
+
+            <div class="mb-3 bg-white p-3 text-muted font-weight-light">
+                {% include '../components/notifications.twig' with {notifications: notifications} %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

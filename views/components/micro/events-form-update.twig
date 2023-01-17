@@ -1,0 +1,61 @@
+<a class="text-primary btn p-0 mr-2" data-toggle="modal"
+   data-target="#modalUpdateEvent_{{ event._id }}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+         class="bi bi-pencil-square" viewBox="0 0 16 16">
+        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+        <path fill-rule="evenodd"
+              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+    </svg>
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="modalUpdateEvent_{{ event._id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="mb-5" method="POST" action="/event/{{ event._id }}/update">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <input type="hidden" class="form-control" name="id" value="{{ event._id }}">
+                <input type="hidden" class="form-control" name="competitionId" value="{{ event.competitionId }}">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Event details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Event name" value="{{ event.name }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="place" placeholder="Place" value="{{ event.place }}" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="address" placeholder="Address" value="{{ event.address }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Date</label>
+                        <input type="date" name="date" class="mr-2" value="{{ event.date }}" required>
+                        <label for="address">Time</label>
+                        <input type="time" name="time" value="{{ event.time }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Tickets</label>
+                        <input type="number" name="ticketSets" min="1" value="{{ event.ticketSets }}"> X
+                        <input type="number" name="tickets" min="1" value="{{ event.tickets }}">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

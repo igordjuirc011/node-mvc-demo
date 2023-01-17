@@ -1,0 +1,5 @@
+<form action="/competition/{{ competition._id }}/delete" method="POST">
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+    <input type="hidden" name="id" value="{{ competition._id }}">
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+</form>

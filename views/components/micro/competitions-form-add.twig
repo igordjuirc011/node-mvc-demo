@@ -1,0 +1,34 @@
+<!-- Button trigger modal -->
+<a class="btn btn-primary text-white ml-auto btn-sm" data-toggle="modal"
+   data-target="#modalAddCompetition">Create new
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="modalAddCompetition" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="POST" action="/competition/create">
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create new competition</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Competition name" required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-block">Create new</button>
+                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

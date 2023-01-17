@@ -1,0 +1,13 @@
+<form action="/competition/{{ competition._id }}/update" method="POST" class="form-check form-switch">
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+    <input type="hidden" name="id" value="{{ competition._id }}">
+    <input type="hidden" name="name" value="{{ competition.name }}">
+    {% if competition.status == 'active' %}
+        <input type="hidden" name="status" value="inactive">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onclick="$(this).closest('form').submit();" checked>
+    {% endif %}
+    {% if competition.status == 'inactive' %}
+        <input type="hidden" name="status" value="active">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onclick="$(this).closest('form').submit();">
+    {% endif %}
+</form>

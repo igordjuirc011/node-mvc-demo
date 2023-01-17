@@ -1,0 +1,26 @@
+{% set isSignedUpForEvent = 0 %}
+{% for application in event.applications %}
+    {% if event.applications|length > 0 and application.userId.toString() == user._id %}
+        {% set isSignedUpForEvent = 1 %}
+    {% endif %}
+{% endfor %}
+
+{% if competition.status == 'active' %}
+    {% if event.applications|length > 0 and isSignedUpForEvent == 1 %}
+        <form action="/application/delete" method="POST">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <input type="hidden" name="eventId" value="{{ event._id }}">
+            <input type="hidden" name="userId" value="{{ user._id }}">
+
+            <button type="submit" class="btn btn-danger btn-sm"> cancel</button>
+        </form>
+    {% else %}
+        <form action="/application/create" method="POST">
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <input type="hidden" name="eventId" value="{{ event._id }}">
+            <input type="hidden" name="userId" value="{{ user._id }}">
+
+            <button type="submit" class="btn btn-success btn-sm">signup</button>
+        </form>
+    {% endif %}
+{% endif %}

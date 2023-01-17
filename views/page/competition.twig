@@ -1,0 +1,44 @@
+{% extends 'layout.twig' %}
+{% block title %}Admin panel{% endblock %}
+
+{% block content %}
+    {% include '../components/flash-messages.twig' with {messages: messages} %}
+
+    <div class="row">
+        <div class="col-3">
+            {% include '../components/competitions-sidebar.twig' with {competition: competition, competitions: competitions} %}
+        </div>
+        <div class="col">
+
+            <div class="mb-3 bg-white p-3">
+                <div class="mb-3 d-flex align-items-center justify-content-between">
+                    {% if user.isAdmin %}
+                        {% include '../components/micro/competition-form-status.twig' with {competition: competition} %}
+                    {% endif %}
+                </div>
+                <div class="d-flex align-items-center ">
+                    <h4 class="mb-0 text-muted font-weight-light mr-auto">{{ competition.name }}</h4>
+
+                    {% if user.isAdmin %}
+                        {% include '../components/micro/competition-form-update.twig' with {competition: competition} %}
+                        {% include '../components/micro/competition-form-delete.twig' with {competition: competition} %}
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div class="bg-white p-3 mb-3">
+                {% include '../components/events-table.twig' with {competition: competition} %}
+            </div>
+
+
+            {% if user.isAdmin and competition.status == 'expired' %}
+                <div class="bg-white p-3">
+                    {% include '../components/winners-table.twig' with {competition: competition} %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}

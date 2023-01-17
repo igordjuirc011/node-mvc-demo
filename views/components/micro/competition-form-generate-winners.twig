@@ -1,0 +1,6 @@
+<form action="/competition/1/generate-winners" method="POST">
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+    <input type="hidden" name="id" value="{{ competition._id }}">
+
+    <button type="submit" class="btn btn-success text-white btn-sm">Generate winners</button>
+</form>

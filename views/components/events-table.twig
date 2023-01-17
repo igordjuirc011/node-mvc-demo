@@ -1,0 +1,57 @@
+<div class="d-flex align-items-center justify-content-between mb-2">
+<p class="text-secondary m-0">Events</p>
+
+{% if user.isAdmin and competition.status == 'active' %}
+    {% include './micro/competition-form-generate-winners.twig' with {competition: competition} %}
+{% endif %}
+
+</div>
+
+<table class="table table-sm table-hover text-muted ">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Place</th>
+        <th scope="col">Address</th>
+        <th scope="col">Date Time</th>
+        <th scope="col">Tickets</th>
+        <th scope="col">                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                             class="bi bi-person" viewBox="0 0 16 16">
+                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+            </svg>  </th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for event in competition.events %}
+        <tr>
+            <td>{{ event.name }}</td>
+            <td>{{ event.place }}</td>
+            <td>{{ event.address }}</td>
+            <td>{{ event.date | date("d/m/Y") }}</td>
+            <td>{{ event.ticketSets }} x {{ event.tickets }}</td>
+            <td>{{ event.applications | length }}</td>
+
+            {% if user.isAdmin %}
+                {% if competition.status != 'expired' %}
+                    <td class="float-right d-flex">
+                        {% include './micro/events-form-update.twig' with {event: event} %}
+                        {% include './micro/events-form-delete.twig' with {event: event} %}
+                    </td>
+                {% endif %}
+            {% else %}
+                <td class="float-right d-flex">
+                    {% include './micro/events-form-signup.twig' with {event: event} %}
+                </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if user.isAdmin%}
+    {% if competition.status == 'inactive' %}
+        {% include './micro/events-form-add.twig' with {competition: competition} %}
+    {% endif %}
+{% endif %}

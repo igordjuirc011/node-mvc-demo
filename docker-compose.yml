@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: "."
+    environment:
+      - SESSION_SECRET=sessionsecret
+      - MONGO_URI=mongodb://root:rootpass@mongo:27017/test?authSource=admin
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    restart: always
+    external_links:
+      - mongo
+    depends_on:
+      - mongo
+    volumes:
+      - ./:/app
+  mongo:
+    image: mongo
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./_data:/data/db

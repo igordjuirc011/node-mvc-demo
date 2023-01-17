@@ -1,0 +1,37 @@
+<div class="bg-white p-3">
+    <div class="text-secondary mb-3 d-flex align-items-center">
+        <h5 class="m-0 text-muted font-weight-light">Competitions</h5>
+
+        {% if user.isAdmin %}
+            {% include './micro/competitions-form-add.twig' %}
+        {% endif %}
+
+    </div>
+    <div class="list-group list-group-flush">
+        {% for competitionSidebar in competitions %}
+
+            {% set activeClass = '' %}
+
+            {% if competition._id.toString() == competitionSidebar._id.toString()%}
+                {% set activeClass = 'active' %}
+            {% endif %}
+
+
+            <a href="/competition/{{ competitionSidebar._id }}"
+               class="list-group-item list-group-item-action mb-1 {{ activeClass }}">
+                {{ competitionSidebar.name }}
+
+                {% if competitionSidebar.status == 'active' %}
+                    <span class="d-block text-primary">
+                        {{ competitionSidebar.status }}
+                    </span>
+                {% else %}
+                    <span class="d-block text-secondary">
+                        {{ competitionSidebar.status }}
+                    </span>
+                {% endif %}
+            </a>
+
+        {% endfor %}
+    </div>
+</div>

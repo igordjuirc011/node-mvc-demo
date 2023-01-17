@@ -1,0 +1,31 @@
+{% if messages|length > 0 %}
+
+    {% if messages.success %}
+        {% for success in messages.success %}
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+
+                {{ success.msg }}
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if messages.errors %}
+        {% for error in messages.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+                {{ error.msg }}
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endif %}
+
+
